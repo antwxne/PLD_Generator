@@ -2,6 +2,7 @@
 name: PLD Card
 about: Add a card to the PLD
 title: 'Title'
+labels: 'VR'
 ---
 
 ## En tant que:
