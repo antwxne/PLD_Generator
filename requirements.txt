@@ -1,2 +1,4 @@
 python-docx
-PyGithub
+marko
+beautifulsoup4
+requests

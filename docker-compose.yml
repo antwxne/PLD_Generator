@@ -7,4 +7,5 @@ services:
       - ./config:/app/config
       - ./resources:/app/resources
       - ./sources:/app/sources
-      - ./output:/app/output
+    env_file:
+      - config/.env
