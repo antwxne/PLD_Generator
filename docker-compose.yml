@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  pld_generator:
+    build: .
+    container_name: pld_generator
+    volumes:
+      - ./config:/app/config
+      - ./resources:/app/resources
+      - ./sources:/app/sources
+      - ./output:/app/output
