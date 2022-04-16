@@ -6,6 +6,13 @@
 - docker-compose
 - Github OAUTH token with `repo` scope authorization
 
+## Usage
+
+```shell
+docker-compose build
+docker-compose up
+```
+
 ## Config
 
 ### .env file
