@@ -1,4 +1,4 @@
-#!/bin/env python3
+#!/bin/python3
 
 from bs4 import BeautifulSoup
 from marko.ext.gfm import gfm as GithubMarkdownParser
@@ -33,6 +33,12 @@ class Issue:
         self.body = self.parse_md_body(json_response["body"])
 
     def to_json(self) -> dict:
+        """
+        It takes a class object and returns a dictionary of the class object's attributes
+
+        Returns:
+          A dictionary with the title, assignees, labels, milestone, and body of the issue.
+        """
         return {
             "title": self.title,
             "assignees": self.assignees,
@@ -43,6 +49,12 @@ class Issue:
 
     @staticmethod
     def parse_md_body(body: str) -> dict:
+        """
+        `parse_md_body` takes a string and returns a dictionary
+
+        Args:
+          body (str): The body of the markdown file.
+        """
         dest = {}
         md_converted = GithubMarkdownParser(body)
         soup = BeautifulSoup(md_converted, features="lxml")
@@ -57,6 +69,15 @@ class Issue:
 
 
 def fetch_issues(repo: str) -> list[Issue]:
+    """
+    It fetches issues from a GitHub repository
+
+    Args:
+      repo (str): str
+
+    Returns:
+      A list of Issue objects
+    """
     res = requests.get(
         f"https://api.github.com/repos/{repo}/issues",
         headers={

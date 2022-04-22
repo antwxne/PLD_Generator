@@ -1,4 +1,5 @@
-#!/bin/env python3
+#!/bin/python3
+
 from json import load
 from os import path
 

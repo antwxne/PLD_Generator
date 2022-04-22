@@ -1,3 +1,92 @@
 {
-  "pld_name": "test.docx"
+  "document_name": "test.docx",
+  "title": "Epitech Innovation Project",
+  "sub-title": "Project Log Document",
+  "cover-image": {
+    "path": "cover_image.png",
+    "size": {
+      "width": 5.04,
+      "height": 3.47
+    }
+  },
+  "description": {
+    "Titre": "Project Log Document (P.L.D.)",
+    "Objet": "Leukidemia PLD",
+    "Auteur": "Leukidemia",
+    "Responsable": "Faizal Nguyen",
+    "E-mail": "leukidemia_2024@labeip.epitech.eu",
+    "Mots-clés": [
+      "Project Log Document",
+      "Epitech Innovation",
+      "Leukidemia",
+      "User stories",
+      "fonctionnalités",
+      "tâches",
+      "gestion de projet",
+      "sprint",
+      "definition of done"
+    ],
+    "Promotion": "2024"
+  },
+  "project_presentation": [
+    "Les enfants atteints d'une maladie chroniques peuvent avoir plus de mal à comprendre ce qui leur arrive et pourquoi ils se retrouvent aussi souvent à l'hôpital ou pourquoi ils doivent prendre un traitement.",
+    "Nous avons rapidement choisi de nous concentrer sur un type de pathologie : le cancer, et plus particulièrement sur la leucémie car c'est le cancer infantile qui touche le plus de personnes chaque année.",
+    "Lors de nos recherches sur le sujet nous nous sommes aperçus que cette maladie n'était pas si simple à comprendre et qu'elle ne devait pas l'être beaucoup plus pour de jeunes enfants.",
+    "De plus nous n'avons pas trouvé de réels outils qui auraient pu permettre à ces enfants de mieux comprendre leur maladie et comment fonctionne leur traitement afin de pouvoir plus facilement accepter leur maladie et leur permettre de répondre aux questions qu'ils pourraient se poser à propos de celle-ci.",
+    "C'est pour cela que nous avons créé Leukidemia, notre objectif est d'expliquer aux enfants leur maladie d'une manière plus pédagogique.",
+    "Nous voudrions créer une simulation en réalité virtuelle qui se déroulerait dans le corps humain, un peu à la manière de \"Il était une fois la vie\", et qui expliquerait comment la maladie agit sur le corps et comment le traitement permet de combattre celle-ci.",
+    "En parallèle de cela, nous aimerions mettre en place une application mobile un peu plus destinée aux parents qui souhaiteraient partager leurs expériences ou poser des questions auprès d'autres parents ou de professionnels de santé.",
+    "L'application permettrait aussi d'expliquer comment utiliser le logiciel VR ainsi que d'expliquer en détail de contenu qui s'y trouve pour que les parents puissent s'informer sur ce qu'apprennent leurs enfants.",
+    "L'objectif de l'application mobile est plutôt de répondre aux questions des parents car ce sont eux qui sont les plus proches de leurs enfants et qui seront le plus souvent amenés à répondre à leurs questions.",
+    "D'autant plus que les médecins que nous avons rencontrés nous ont tous expliqué que la manière dont les parents appréhendaient la maladie jouait un grand rôle dans l'acceptation de celle-ci par les enfants."
+  ],
+  "organigramme-livrable": {
+    "path": "organigramme_livrable.png",
+    "size": {
+      "width": 21.3,
+      "height": 14
+    }
+  },
+  "livrable-maps": [
+    {
+      "name": "Backend",
+      "path": "carte_livrable_backend.png",
+      "size": {
+        "width": 8.43,
+        "height": 8.91
+      }
+    },
+    {
+      "name": "Front Web",
+      "path": "carte_livrable_frontend.png",
+      "size": {
+        "width": 8.30,
+        "height": 7.49
+      }
+    },
+    {
+      "name": "Front Mobile",
+      "path": "carte_livrable_front_mobile.png",
+      "size": {
+        "width": 12.87,
+        "height": 14.54
+      }
+    },
+    {
+      "name": "VR",
+      "path": "carte_livrable_vr.png",
+      "size": {
+        "width": 15.26,
+        "height": 13.29
+      }
+    },
+    {
+      "name": "Dev-ops",
+      "path": "carte_livrable_devops.png",
+      "size": {
+        "width": 10.44,
+        "height": 6.69
+      }
+    }
+  ]
 }
