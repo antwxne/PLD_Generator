@@ -43,8 +43,8 @@
   "organigramme-livrable": {
     "path": "organigramme_livrable.png",
     "size": {
-      "width": 6.50,
-      "height": 4.51
+      "width": 21.3,
+      "height": 14
     }
   },
   "livrable-maps": [
@@ -52,40 +52,40 @@
       "name": "Backend",
       "path": "carte_livrable_backend.png",
       "size": {
-        "width": 5.65,
-        "height": 5.98
+        "width": 8.43,
+        "height": 8.91
       }
     },
     {
       "name": "Front Web",
       "path": "carte_livrable_frontend.png",
       "size": {
-        "width": 5.54,
-        "height": 5
+        "width": 8.30,
+        "height": 7.49
       }
     },
     {
       "name": "Front Mobile",
       "path": "carte_livrable_front_mobile.png",
       "size": {
-        "width": 4.43,
-        "height": 5
+        "width": 12.87,
+        "height": 14.54
       }
     },
     {
       "name": "VR",
       "path": "carte_livrable_vr.png",
       "size": {
-        "width": 5,
-        "height": 4.35
+        "width": 15.26,
+        "height": 13.29
       }
     },
     {
       "name": "Dev-ops",
       "path": "carte_livrable_devops.png",
       "size": {
-        "width": 5.85,
-        "height": 3.75
+        "width": 10.44,
+        "height": 6.69
       }
     }
   ]

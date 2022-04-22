@@ -20,6 +20,31 @@ def load_name_association() -> dict:
     return dest
 
 
+def get_repository_list() -> list[str]:
+    file_path = getenv("REPOSITORY_LIST_PATH")
+    repo = []
+    try:
+        json_list = get_json_from_file(file_path)
+        repo = [elem["repository"] for elem in json_list]
+    except (ValueError, KeyError) as e:
+        print(e)
+    return repo
+
+
+def get_issues() -> dict:
+    repositories = get_repository_list()
+    dest = {}
+    for repository in repositories:
+        issues = fetch_issues(repository)
+        for issue in issues:
+            try:
+                list(dest[issue.labels[0]]).append(issue)
+            except KeyError:
+                dest[issue.labels[0]] = []
+                dest[issue.labels[0]].append(issue)
+    return dest
+
+
 NAME_CONVERTER = load_name_association()
 
 
@@ -28,6 +53,7 @@ class Issue:
         # print("json response == ", json_response)
         self.title = json_response["title"]
         self.labels = [label["name"] for label in json_response["labels"]]
+        self.labels.remove("PLD")
         self.assignees = [NAME_CONVERTER[assignee["login"]] for assignee in json_response["assignees"]]
         self.milestone = json_response["milestone"]
         self.body = self.parse_md_body(json_response["body"])

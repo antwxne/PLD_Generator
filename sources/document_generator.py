@@ -1,8 +1,10 @@
 #!/bin/python3
 
 from os import getenv
+from sources.fetch_github import Issue, get_issues
 from sources.json_file import get_json_from_file
-from sources.document_utils import (add_title_center, add_picture_center, add_title, save, page_break, create_array)
+from sources.document_utils import (add_title_center, add_picture_center, add_title,
+                                    save, add_paragraph_indent, page_break, create_array)
 from datetime import date
 
 CONFIG_PATH = getenv("CONFIG_PATH")
@@ -42,8 +44,108 @@ def create_document_description(description: dict) -> None:
     page_break()
 
 
+def create_revision_table() -> None:
+    add_title("Description du document")
+    array = create_array(2, 5)
+    header_values = ["Date", "Version", "Auteur", "Section(s)", "Commentaires"]
+    for index in range(len(array.rows[0].cells)):
+        array.rows[0].cells[index].text = header_values[index]
+    array.rows[1].cells[0].text = date.today().strftime("%d/%m/%Y")
+    array.rows[1].cells[1].text = "1.0"
+    array.rows[1].cells[2].text = "Leukidemia"
+    array.rows[1].cells[3].text = "Toutes"
+    array.rows[1].cells[4].text = "Première version"
+    page_break()
+
+
+def create_project_presentation(presentation: list[str]) -> None:
+    add_title("Présentation du projet")
+    for paragraph in presentation:
+        add_paragraph_indent(paragraph)
+    page_break()
+
+
+def create_organigramme_livrable(image_infos: dict) -> None:
+    add_title("Organigramme des livrables")
+    image_path = f'{RESOURCES_FOLDER}/{image_infos["path"]}'
+    size = image_infos["size"]
+    add_picture_center(image_path, size["width"], size["height"])
+    page_break()
+
+
+def create_livrable_map(livrable_maps: list[dict]) -> None:
+    add_title("Carte des livrables")
+    for livrable in livrable_maps:
+        add_title(livrable["name"], 2)
+        image_path = f'{RESOURCES_FOLDER}/{livrable["path"]}'
+        size = livrable["size"]
+        add_picture_center(image_path, size["width"], size["height"])
+
+
+def create_card(issue: Issue) -> None:
+    array = create_array(7, 2)
+    content = issue.body
+    array.rows[0].cells[0].text = issue.title
+    array.rows[0].cells[0].merge(array.rows[0].cells[1])
+    array.rows[1].cells[0].text = "En tant que:"
+    array.rows[2].cells[0].text = content["En tant que:"]
+    array.rows[1].cells[1].text = "Je veux:"
+    array.rows[2].cells[1].text = content["Je veux:"]
+    array.rows[3].cells[0].text = f'Description: {content["Description:"]}'
+    array.rows[3].cells[0].merge(array.rows[3].cells[1])
+    array.rows[4].cells[0].text = "Definition of done:" "\n- " + "\n- ".join(content["Definition of done:"])
+    array.rows[4].cells[0].merge(array.rows[4].cells[1])
+    array.rows[5].cells[0].text = "Charge estimée"
+    array.rows[5].cells[1].text = content["Charge estimée"]
+    array.rows[6].cells[0].text = "Assignés:"
+    array.rows[6].cells[1].text = ", ".join(issue.assignees)
+
+
+def create_stories_cards() -> None:
+    add_title("Tableau des stories")
+    all_issues = get_issues()
+    for sub_title in all_issues:
+        add_title(sub_title, 2)
+        for issue in all_issues[sub_title]:
+            create_card(issue)
+    page_break()
+
+
+def create_rapport() -> None:
+    add_title("Rapports d’avancement du projet")
+    array = create_array(5, 2)
+    array.rows[0].cells[0].text = "Avancement global pour ce rendez-vous"
+    array.rows[0].cells[0].merge(array.rows[0].cells[1])
+    array.rows[1].cells[
+        0].text = "Sur quoi avez-vous collectivement avancé depuis le dernier RDV ? Quel est le % d’avancement de chacune des parties de votre projet"
+    array.rows[1].cells[0].merge(array.rows[1].cells[1])
+    array.rows[2].cells[0].text = ""
+    array.rows[2].cells[0].merge(array.rows[2].cells[1])
+    array.rows[3].cells[0].text = "Nom"
+    array.rows[3].cells[1].text = "Travail (liste des tâches détaillées finies ou en cours)"
+    page_break()
+
+
+def create_resume() -> None:
+    array = create_array(6, 1)
+    array.rows[0].cells[0].text = "Points bloquants"
+    array.rows[1].cells[0].text = "Rappel de points et tickets en souffrance"
+    array.rows[2].cells[0].text = ""
+    array.rows[3].cells[0].text = "Commentaire général"
+    array.rows[4].cells[0].text = "Commentaire libre et questions"
+    array.rows[5].cells[0].text = ""
+    page_break()
+
+
 def create_document():
     config = get_json_from_file(CONFIG_PATH)
     create_cover_page(config)
     create_document_description(config["description"])
+    create_revision_table()
+    create_project_presentation(config["project_presentation"])
+    create_organigramme_livrable(config["organigramme-livrable"])
+    create_livrable_map(config["livrable-maps"])
+    create_stories_cards()
+    create_rapport()
+    create_resume()
     save(RESOURCES_FOLDER + "/" + config["document_name"])
