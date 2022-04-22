@@ -105,7 +105,7 @@ def fetch_issues(repo: str) -> list[Issue]:
       A list of Issue objects
     """
     res = requests.get(
-        f"https://api.github.com/repos/{repo}/issues",
+        f"https://api.github.com/repos/{repo}/issues?labels=PLD",
         headers={
             "Accept": "application/vnd.github.v3+json",
             "Authorization": f'token {getenv("OAUTH_TOKEN")}'
