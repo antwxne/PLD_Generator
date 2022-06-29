@@ -24,18 +24,6 @@ And provide the following informations:
 ```
 # Your github OAUTH_TOKEN
 OAUTH_TOKEN=
-
-# Path to the json file containing the users config
-USERS_CONFIG_PATH=
-
-# Path to the json file containing the general config
-CONFIG_PATH=
-
-# Path to the json file containing the repository list
-REPOSITORY_LIST_PATH=
-
-# Path to the directory wich contains pictures and where the document will be saved
-RESOURCES_FOLDER=./resources
 ```
 
 ### USERS_CONFIG
