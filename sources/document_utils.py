@@ -4,7 +4,7 @@ from docx import Document
 from docx.shared import Inches, Cm
 from docx.table import Table
 
-DOCUMENT = Document()
+DOCUMENT: Document = Document()
 
 
 def center() -> None:
@@ -48,6 +48,11 @@ def add_paragraph_indent(text: str, indent: int = 1) -> None:
 
 def create_array(rows: int, cols: int) -> Table:
     return DOCUMENT.add_table(rows=rows, cols=cols)
+
+
+def blank_line() -> None:
+    DOCUMENT.paragraphs[-1].add_run().add_break()
+    DOCUMENT.paragraphs[-1].add_run().add_break()
 
 
 def page_break() -> None:

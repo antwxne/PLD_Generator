@@ -1,19 +1,22 @@
 #!/bin/python3
 
 from os import getenv
+
+from docx.table import Table
+
 from sources.fetch_github import Issue, get_issues
 from sources.json_file import get_json_from_file
 from sources.document_utils import (add_title_center, add_picture_center, add_title,
-                                    save, add_paragraph_indent, page_break, create_array)
+                                    save, add_paragraph_indent, page_break, create_array, blank_line, add_paragraph)
 from datetime import date
 
-CONFIG_PATH = getenv("CONFIG_PATH")
-RESOURCES_FOLDER = getenv("RESOURCES_FOLDER")
+CONFIG_PATH: str = getenv("CONFIG_PATH")
+RESOURCES_FOLDER: str = getenv("RESOURCES_FOLDER")
 
 
 def create_cover_page(config: dict) -> None:
-    cover_image = f'{RESOURCES_FOLDER}/{config["cover-image"]["path"]}'
-    size = config["cover-image"]["size"]
+    cover_image: str = f'{RESOURCES_FOLDER}/{config["cover-image"]["path"]}'
+    size: dict[str, float] = config["cover-image"]["size"]
     add_picture_center(cover_image, width=size["width"], height=size["height"])
     add_title_center(config["title"], level=0)
     add_title_center(config["sub-title"], level=1)
@@ -22,7 +25,7 @@ def create_cover_page(config: dict) -> None:
 
 def create_document_description(description: dict) -> None:
     add_title("Description du document")
-    array = create_array(9, 2)
+    array: Table = create_array(9, 2)
     array.rows[0].cells[0].text = "Titre"
     array.rows[0].cells[1].text = description["Titre"]
     array.rows[1].cells[0].text = "Objet"
@@ -46,8 +49,8 @@ def create_document_description(description: dict) -> None:
 
 def create_revision_table() -> None:
     add_title("Description du document")
-    array = create_array(2, 5)
-    header_values = ["Date", "Version", "Auteur", "Section(s)", "Commentaires"]
+    array: Table = create_array(2, 5)
+    header_values: list[str] = ["Date", "Version", "Auteur", "Section(s)", "Commentaires"]
     for index in range(len(array.rows[0].cells)):
         array.rows[0].cells[index].text = header_values[index]
     array.rows[1].cells[0].text = date.today().strftime("%d/%m/%Y")
@@ -67,8 +70,8 @@ def create_project_presentation(presentation: list[str]) -> None:
 
 def create_organigramme_livrable(image_infos: dict) -> None:
     add_title("Organigramme des livrables")
-    image_path = f'{RESOURCES_FOLDER}/{image_infos["path"]}'
-    size = image_infos["size"]
+    image_path: str = f'{RESOURCES_FOLDER}/{image_infos["path"]}'
+    size: dict[str, float] = image_infos["size"]
     add_picture_center(image_path, size["width"], size["height"])
     page_break()
 
@@ -77,14 +80,14 @@ def create_livrable_map(livrable_maps: list[dict]) -> None:
     add_title("Carte des livrables")
     for livrable in livrable_maps:
         add_title(livrable["name"], 2)
-        image_path = f'{RESOURCES_FOLDER}/{livrable["path"]}'
-        size = livrable["size"]
+        image_path: str = f'{RESOURCES_FOLDER}/{livrable["path"]}'
+        size: dict[str, float] = livrable["size"]
         add_picture_center(image_path, size["width"], size["height"])
 
 
 def create_card(issue: Issue) -> None:
-    array = create_array(7, 2)
-    content = issue.body
+    array: Table = create_array(7, 2)
+    content: dict = issue.body
     array.rows[0].cells[0].text = issue.title
     array.rows[0].cells[0].merge(array.rows[0].cells[1])
     array.rows[1].cells[0].text = "En tant que:"
@@ -103,17 +106,17 @@ def create_card(issue: Issue) -> None:
 
 def create_stories_cards() -> None:
     add_title("Tableau des stories")
-    all_issues = get_issues()
-    for sub_title in all_issues:
+    all_issues: dict[str, list[Issue]] = get_issues()
+    for sub_title, issues in all_issues.items():
         add_title(sub_title, 2)
-        for issue in all_issues[sub_title]:
+        for issue in issues:
             create_card(issue)
     page_break()
 
 
 def create_rapport() -> None:
     add_title("Rapports d’avancement du projet")
-    array = create_array(5, 2)
+    array: Table = create_array(5, 2)
     array.rows[0].cells[0].text = "Avancement global pour ce rendez-vous"
     array.rows[0].cells[0].merge(array.rows[0].cells[1])
     array.rows[1].cells[
@@ -127,7 +130,7 @@ def create_rapport() -> None:
 
 
 def create_resume() -> None:
-    array = create_array(6, 1)
+    array: Table = create_array(6, 1)
     array.rows[0].cells[0].text = "Points bloquants"
     array.rows[1].cells[0].text = "Rappel de points et tickets en souffrance"
     array.rows[2].cells[0].text = ""

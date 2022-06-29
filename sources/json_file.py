@@ -2,9 +2,10 @@
 
 from json import load, dump
 from os import path
+from typing import Union
 
 
-def write_json(json_data, filename):
+def write_json(json_data: Union[dict, list[dict]], filename: str):
     """ Write supposed json data into a file
 
     Args:
@@ -15,7 +16,8 @@ def write_json(json_data, filename):
     dump(json_data, file, indent=4)
     file.close()
 
-def get_json_from_file(filename: str) -> dict:
+
+def get_json_from_file(filename: str) -> Union[dict, list[dict]]:
     """ Parse a file containing a json
 
     Args:
@@ -28,9 +30,8 @@ def get_json_from_file(filename: str) -> dict:
         Any: json parsed
     """
     if path.exists(filename) and path.isfile(filename):
-        file = open(filename, "r")
-        json_data = load(file)
-        file.close()
+        with open(filename, "r") as f:
+            json_data: Union[dict, list[dict]] = load(fp=f)
         return json_data
     else:
         raise ValueError("Wrong filename: " + filename + " doesn't exist")
