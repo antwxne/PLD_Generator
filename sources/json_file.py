@@ -1,8 +1,19 @@
 #!/bin/python3
 
-from json import load
+from json import load, dump
 from os import path
 
+
+def write_json(json_data, filename):
+    """ Write supposed json data into a file
+
+    Args:
+        json_data (Any): supposed json data
+        filename (String): name of the file where to write the data
+    """
+    file = open(filename, "w")
+    dump(json_data, file, indent=4)
+    file.close()
 
 def get_json_from_file(filename: str) -> dict:
     """ Parse a file containing a json

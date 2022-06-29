@@ -1,5 +1,17 @@
 [
   {
-    "repository": "antwxne/PLD_Generator"
+    "repository": "Leukidemia-corporation/LeukiVR"
+  },
+  {
+    "repository": "Leukidemia-corporation/LeukiCORE"
+  },
+  {
+    "repository": "Leukidemia-corporation/LeukiMOBILE"
+  },
+  {
+    "repository": "Leukidemia-corporation/LeukiWEB"
+  },
+  {
+    "repository": "Leukidemia-corporation/LeukiAPI"
   }
 ]

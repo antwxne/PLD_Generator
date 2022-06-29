@@ -5,7 +5,7 @@ from marko.ext.gfm import gfm as GithubMarkdownParser
 from os import getenv
 import requests
 
-from sources.json_file import get_json_from_file
+from sources.json_file import get_json_from_file, write_json
 
 
 def load_name_association() -> dict:
@@ -33,15 +33,14 @@ def get_repository_list() -> list[str]:
 
 def get_issues() -> dict:
     repositories = get_repository_list()
-    dest = {}
+    dest: dict[str, list[Issue]] = {}
     for repository in repositories:
         issues = fetch_issues(repository)
         for issue in issues:
-            try:
-                list(dest[issue.labels[0]]).append(issue)
-            except KeyError:
-                dest[issue.labels[0]] = []
+            if issue.labels[0] in dest:
                 dest[issue.labels[0]].append(issue)
+            else:
+                dest[issue.labels[0]] = [issue]
     return dest
 
 
