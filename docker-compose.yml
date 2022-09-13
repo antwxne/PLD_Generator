@@ -13,4 +13,4 @@ services:
       - ./resources:/app/resources
       - ./sources:/app/sources
     env_file:
-      - config/.env
+      - ./config/.env
